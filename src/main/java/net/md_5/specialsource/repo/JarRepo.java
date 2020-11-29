@@ -28,14 +28,16 @@
  */
 package net.md_5.specialsource.repo;
 
-import lombok.RequiredArgsConstructor;
 import net.md_5.specialsource.Jar;
 import org.objectweb.asm.tree.ClassNode;
 
-@RequiredArgsConstructor
 public class JarRepo extends CachingRepo {
 
     private final Jar jar;
+
+    public JarRepo(Jar jar) {
+        this.jar = jar;
+    }
 
     @Override
     protected ClassNode findClass0(String internalName) {

@@ -37,7 +37,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import lombok.Getter;
 
 /**
  * Access mapper - for modifying access flags on symbols
@@ -61,10 +60,16 @@ import lombok.Getter;
  */
 public class AccessMap {
 
-    @Getter
     private Map<String, AccessChange> map = new HashMap<String, AccessChange>();
-    @Getter
     private Set<String> appliedMaps = new HashSet<String>();
+
+    public Map<String, AccessChange> getMap() {
+        return map;
+    }
+
+    public Set<String> getAppliedMaps() {
+        return appliedMaps;
+    }
 
     public AccessMap() {
     }

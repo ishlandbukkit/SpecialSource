@@ -28,20 +28,43 @@
  */
 package net.md_5.specialsource.util;
 
-import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import java.util.Objects;
 
 /**
  * A class representing a set of 2 objects as defined by the type parameters.
  *
  * @param <E> type of element
  */
-@ToString
-@EqualsAndHashCode
-@RequiredArgsConstructor
 public class Pair<E> {
 
     public final E first;
     public final E second;
+
+
+    public Pair(E first, E second) {
+        this.first = first;
+        this.second = second;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pair<?> pair = (Pair<?>) o;
+        return Objects.equals(first, pair.first) &&
+                Objects.equals(second, pair.second);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(first, second);
+    }
+
+    @Override
+    public String toString() {
+        return "Pair{" +
+                "first=" + first +
+                ", second=" + second +
+                '}';
+    }
 }

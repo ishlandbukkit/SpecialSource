@@ -32,7 +32,6 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import java.util.HashMap;
 import java.util.Map;
-import lombok.ToString;
 import org.objectweb.asm.Opcodes;
 
 /**
@@ -49,7 +48,6 @@ import org.objectweb.asm.Opcodes;
  *
  * @see AccessMap
  */
-@ToString
 public class AccessChange {
 
     private int clear; // bits to clear to 0
@@ -197,5 +195,14 @@ public class AccessChange {
         access |= visibility;
 
         return access;
+    }
+
+    @Override
+    public String toString() {
+        return "AccessChange{" +
+                "clear=" + clear +
+                ", set=" + set +
+                ", vis=" + vis +
+                '}';
     }
 }

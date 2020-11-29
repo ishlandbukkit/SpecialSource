@@ -28,15 +28,12 @@
  */
 package net.md_5.specialsource;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import java.util.Objects;
 
 /**
  * A class which can be used to represent a field, method, or anything else
  * which has an owner, a name and a descriptor.
  */
-@Data
-@EqualsAndHashCode(exclude = "access")
 public class Ownable {
 
     public final NodeType type;
@@ -44,4 +41,28 @@ public class Ownable {
     public final String name;
     public final String descriptor;
     public final int access;
+
+    public Ownable(NodeType type, String owner, String name, String descriptor, int access) {
+        this.type = type;
+        this.owner = owner;
+        this.name = name;
+        this.descriptor = descriptor;
+        this.access = access;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ownable ownable = (Ownable) o;
+        return type == ownable.type &&
+                Objects.equals(owner, ownable.owner) &&
+                Objects.equals(name, ownable.name) &&
+                Objects.equals(descriptor, ownable.descriptor);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, owner, name, descriptor);
+    }
 }

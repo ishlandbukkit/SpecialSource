@@ -28,9 +28,6 @@
  */
 package net.md_5.specialsource;
 
-import lombok.Data;
-
-@Data
 public class ProgressMeter {
 
     private int progress;
@@ -39,6 +36,11 @@ public class ProgressMeter {
     private final String progressFormat;
     //
     public static double printInterval;
+
+    public ProgressMeter(int total, String progressFormat) {
+        this.total = total;
+        this.progressFormat = progressFormat;
+    }
 
     public void makeProgress() {
         if (!SpecialSource.verbose()) {

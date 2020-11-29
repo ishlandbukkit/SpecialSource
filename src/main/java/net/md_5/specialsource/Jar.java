@@ -40,11 +40,6 @@ import java.util.jar.Manifest;
 import java.util.zip.ZipEntry;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
-import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.tree.ClassNode;
 
@@ -54,18 +49,57 @@ import org.objectweb.asm.tree.ClassNode;
  * class file, and speedy lookups to see if the jar contains the specified
  * class.
  */
-@ToString
-@EqualsAndHashCode
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class Jar implements Closeable {
 
     private final List<JarFile> jarFiles;
-    @Getter
     private final String main;
-    @Getter
     private final String filename;
     private final LinkedHashMap<String, JarFile> jarForResource;
     private final Set<String> contains = new HashSet<String>();
+
+    private Jar(List<JarFile> jarFiles, String main, String filename, LinkedHashMap<String, JarFile> jarForResource) {
+        this.jarFiles = jarFiles;
+        this.main = main;
+        this.filename = filename;
+        this.jarForResource = jarForResource;
+    }
+
+
+    public String getMain() {
+        return main;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    @Override
+    public String toString() {
+        return "Jar{" +
+                "jarFiles=" + jarFiles +
+                ", main='" + main + '\'' +
+                ", filename='" + filename + '\'' +
+                ", jarForResource=" + jarForResource +
+                ", contains=" + contains +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Jar jar = (Jar) o;
+        return Objects.equals(jarFiles, jar.jarFiles) &&
+                Objects.equals(main, jar.main) &&
+                Objects.equals(filename, jar.filename) &&
+                Objects.equals(jarForResource, jar.jarForResource) &&
+                Objects.equals(contains, jar.contains);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(jarFiles, main, filename, jarForResource, contains);
+    }
 
     /**
      * Check if this jar contains the given class. Takes the internal name of a

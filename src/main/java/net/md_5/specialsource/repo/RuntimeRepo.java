@@ -28,18 +28,20 @@
  */
 package net.md_5.specialsource.repo;
 
-import java.io.IOException;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.tree.ClassNode;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class RuntimeRepo extends CachingRepo {
 
-    @Getter
     private static final RuntimeRepo instance = new RuntimeRepo();
+
+    private RuntimeRepo() {
+
+    }
+
+    public static RuntimeRepo getInstance() {
+        return instance;
+    }
 
     @Override
     protected ClassNode findClass0(String internalName) {

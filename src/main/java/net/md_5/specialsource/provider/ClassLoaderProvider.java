@@ -30,21 +30,21 @@ package net.md_5.specialsource.provider;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.tree.ClassNode;
-import java.io.IOException;
+
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
-import lombok.RequiredArgsConstructor;
 
 /**
  * Lookup inheritance from a class in a given URLClassLoader.
  */
-@RequiredArgsConstructor
 public class ClassLoaderProvider implements InheritanceProvider {
 
     private final ClassLoader classLoader;
+
+    public ClassLoaderProvider(ClassLoader classLoader) {
+        this.classLoader = classLoader;
+    }
 
     @Override
     @SuppressWarnings("unchecked")

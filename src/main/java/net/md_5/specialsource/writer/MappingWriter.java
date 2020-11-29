@@ -34,10 +34,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import lombok.RequiredArgsConstructor;
 import net.md_5.specialsource.Ownable;
 
-@RequiredArgsConstructor
 public abstract class MappingWriter {
 
     private static final String HEADER = ""
@@ -47,6 +45,11 @@ public abstract class MappingWriter {
     private final List<String> lines = new ArrayList<String>();
     private final String oldJarName;
     private final String newJarName;
+
+    protected MappingWriter(String oldJarName, String newJarName) {
+        this.oldJarName = oldJarName;
+        this.newJarName = newJarName;
+    }
 
     public abstract void addClassMap(String oldClass, String newClass);
 

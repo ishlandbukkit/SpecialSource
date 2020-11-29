@@ -32,19 +32,25 @@ import org.objectweb.asm.tree.ClassNode;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 import net.md_5.specialsource.Jar;
 
 /**
  * Lookup inheritance from a class given a jar.
  */
-@ToString
-@RequiredArgsConstructor
 public class JarProvider implements InheritanceProvider {
 
     private final Jar self;
+
+    public JarProvider(Jar self) {
+        this.self = self;
+    }
+
+    @Override
+    public String toString() {
+        return "JarProvider{" +
+                "self=" + self +
+                '}';
+    }
 
     @Override
     @SuppressWarnings("unchecked")
